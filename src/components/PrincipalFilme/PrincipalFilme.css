@@ -1,0 +1,34 @@
+.principalFilme{
+    padding: 50px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    column-gap: 50px;
+    border: 0px solid red;
+    height: 500px;
+    width: 75%;
+}
+
+.principalFilmeInfo{
+    color: white;
+}
+
+.principalFilmeInfo span{
+    margin-right: 10px;
+}
+
+.playNow{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    border-radius: 20px;
+    padding: 20px 0px;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 30px;
+}
+
+.playNow span{
+    font-size: 1.1em;
+    display: block;
+}
