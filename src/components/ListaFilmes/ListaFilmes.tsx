@@ -23,8 +23,7 @@ const ListaFilmes = () => {
     if (loading) {
       return <h1>Carregando...</h1>;
     }
-  
-    console.log(listaFilmes);
+    
     return (
         <div className="containerlistaFilmes">
             {listaFilmes!.map((item) => {
