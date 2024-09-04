@@ -4,7 +4,7 @@ import Filme from "../Filme/Filme";
 import { useEffect, useState } from "react";
 
 const ListaFilmes = () => {
-    const [listaFilmes, setListaFilmes] = useState<ModeloFilme[] | null>(null);
+    const [listaFilmes, setListaFilmes] = useState<ModeloFilme[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
   
     useEffect(() => {
@@ -24,9 +24,11 @@ const ListaFilmes = () => {
       return <h1>Carregando...</h1>;
     }
     
+    let listaFiltrada = listaFilmes?.filter(filme => filme.urlTrailer != null);
+
     return (
         <div className="containerlistaFilmes">
-            {listaFilmes!.map((item) => {
+            {listaFiltrada.map((item) => {
               return <Filme filme={item} />;
             })}
           </div>

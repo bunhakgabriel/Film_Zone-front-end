@@ -38,7 +38,19 @@
   }
 }
 
-.container {
+/* .container {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://img.freepik.com/fotos-gratis/plano-de-fundo-texturizado-preto_24972-764.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} 
+*/
+
+
+body {
   margin: 0;
   padding: 0;
   background-image: url('https://img.freepik.com/fotos-gratis/plano-de-fundo-texturizado-preto_24972-764.jpg');
@@ -48,4 +60,8 @@
   background-position: center;
   /* Centraliza a imagem de fundo */
   background-repeat: no-repeat;
+}
+
+body{
+  padding-top: 120px;
 }
