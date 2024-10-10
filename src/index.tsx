@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ListaFilmes from './components/ListaFilmes/ListaFilmes';
 import PrincipalFilme from './components/PrincipalFilme/PrincipalFilme';
+import PaginaInicial from './components/PaginaInicial/PaginaInicial';
 
 // const router = createBrowserRouter([
 //   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <PaginaInicial />
+      },
+      {
+        path: "/filmes",
         element: <ListaFilmes />
       },
       //Rota com identificador único - dynamic routes

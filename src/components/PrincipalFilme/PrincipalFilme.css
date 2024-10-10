@@ -1,6 +1,6 @@
 .principalFilme{
     padding: 50px;
-    margin: 0px auto;
+    margin: 50px auto;
     display: flex;
     justify-content: center;
     column-gap: 50px;
@@ -11,6 +11,8 @@
 
 .principalFilmeInfo{
     color: white;
+    border: 0px solid red;
+    padding-top: 30px;
 }
 
 .principalFilmeInfo span{
@@ -64,6 +66,22 @@
     height: 95%;
 }
 .trailerBlock video{
+    width: 100%;
+    height: 100%;
+}
+.filmeNone{
+    display: none;
+}
+
+.filmeBlock{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 95%;
+}
+.filmeBlock video{
     width: 100%;
     height: 100%;
 }

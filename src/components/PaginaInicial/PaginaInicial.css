@@ -1,0 +1,14 @@
+.paginaInicial{
+    margin-top: 11vh;
+    width: 100vw;
+    height: 88vh;
+    background-image: url('../../../public/capaPaginaInicial3.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.paginaInicial img{
+    width: 100%;
+    height: 100%;
+}

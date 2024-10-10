@@ -11,10 +11,15 @@ const PrincipalFilme = () => {
   const [filme, setFilme] = useState<ModeloFilme>(new ModeloFilme());
   const [loading, setLoading] = useState<boolean>(true);
   const [trailer, setTrailer] = useState<boolean>(false);
+  const [filmeMidia, setfilmeMidia] = useState<boolean>(false);
   const trailerRef = useRef<HTMLVideoElement>(null);
+  const filmeMidiaRef = useRef<HTMLVideoElement>(null);
+
+  let meuIp = 'localhost'
+  let ipFaculdade = '172.17.2.89'
 
   useEffect(() => {
-    fetch(`http://localhost:8080/FilmZone.api/api/Filme/${id}`)
+    fetch(`http://${meuIp}:8080/FilmZone.api/api/Filme/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setFilme(data);
@@ -52,6 +57,19 @@ const PrincipalFilme = () => {
       trailerRef.current.currentTime = 0; 
     }
   }
+  const handleClickFilme = () => {
+    setfilmeMidia(!filmeMidia);
+    if (filmeMidiaRef.current && !trailer) {
+      filmeMidiaRef.current.play().catch((error) => {
+        alert("Erro ao tentar reproduzir o vídeo automaticamente:");
+        console.log('erro ao reproduzir: ', error)
+      });
+    }
+    if(filmeMidiaRef.current && filmeMidia){
+      filmeMidiaRef.current.pause();
+      filmeMidiaRef.current.currentTime = 0; 
+    }
+  }
 
   return (
     <div className="principalFilme">
@@ -69,7 +87,10 @@ const PrincipalFilme = () => {
         </div>
         <div className="playNow" >
           <span><FontAwesomeIcon icon={faStar} /> {filme.rating?.toFixed(1)}</span>
-          <button className="playMidia"><FontAwesomeIcon icon={faPlay} /> Play Filme</button>
+          <button className="playMidia" onClick={handleClickFilme}>
+            <FontAwesomeIcon icon={faPlay} /> 
+            Play Filme
+          </button>
           <button className="playMidia" onClick={handleClickTrailer}>
             <FontAwesomeIcon icon={faPlay} />
             Ver trailer
@@ -81,6 +102,13 @@ const PrincipalFilme = () => {
         <button onClick={handleClickTrailer} >Sair</button>
           <video ref={trailerRef} controls width="250" controlsList="nodownload">  
             <source src={filme.urlTrailer} type="video/webm" />
+          </video>
+        </div>
+
+        <div className={filmeMidia ? 'filmeBlock' : 'filmeNone'}>
+        <button onClick={handleClickFilme} >Sair</button>
+          <video ref={filmeMidiaRef} controls width="250" controlsList="nodownload">  
+            <source src={filme.urlFilme} type="video/webm" />
           </video>
         </div>
 
