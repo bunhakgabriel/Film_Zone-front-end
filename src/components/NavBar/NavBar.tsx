@@ -17,7 +17,7 @@ const NavBar = ({ busca }: ComponenteFilhoProps) => {
             </div>
             <div>
                 <ul>
-                    <li><Link className='link' to="/" >Home</Link></li>
+                    <li><Link className='link' to="/Home" >Home</Link></li>
                     <li><Link className='link' to="/filmes" >Filmes</Link></li>
                     <li>
                         Gênero:
@@ -31,7 +31,7 @@ const NavBar = ({ busca }: ComponenteFilhoProps) => {
                     <li>Fórum</li>
                 </ul>
             </div>
-            <div className='input' >
+            <div className='inputBusca' >
                 <input type="text" onChange={(e) => busca!('F', e.target.value)} />
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: "white", }} size='xl' />
             </div>

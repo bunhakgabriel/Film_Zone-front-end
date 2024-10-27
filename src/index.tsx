@@ -9,6 +9,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ListaFilmes from './components/ListaFilmes/ListaFilmes';
 import PrincipalFilme from './components/PrincipalFilme/PrincipalFilme';
 import PaginaInicial from './components/PaginaInicial/PaginaInicial';
+import Cadastrar from './components/Cadastrar/Cadastrar';
+import Login from './components/Login/Login';
 
 // const router = createBrowserRouter([
 //   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Login />
+      },
+      {
+        path: "/Cadastrar",
+        element: <Cadastrar />
+      },
+      {
+        path: "/Home",
         element: <PaginaInicial />
       },
       {
