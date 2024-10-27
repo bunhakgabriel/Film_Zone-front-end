@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Cadastrar.css'; // Supondo que o arquivo CSS esteja na mesma pasta
+import { Link, useNavigate } from 'react-router-dom';
+import './Cadastrar.css';
+
+import { app } from '../../firebase/firebase';
+import { getFirestore, collection, getDocs, setDoc, doc, addDoc, query, where } from 'firebase/firestore'
 
 const Cadastrar = () => {
-  const [usuario, setUsuario] = useState<string>('');
+  const [nomeUsuario, setNomeUsuario] = useState<string>('');
   const [senha, setSenha] = useState<string>('');
   const [confirmarSenha, setConfirmarSenha] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate()
+  const db = getFirestore(app)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (senha !== confirmarSenha) {
       alert("As senhas não coincidem!");
       return;
     }
-    console.log("Usuário:", usuario, "Senha:", senha);
+
+    const usuario = { nomeUsuario, senha }
+
+    try {
+
+      const usuariosCollection = collection(db, 'usuarios');
+      const q = query(usuariosCollection, where('nomeUsuario', '==', nomeUsuario));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        alert('Usuário já cadastrado! Tente outro.');
+        return;
+      }
+
+      await addDoc(usuariosCollection, usuario);
+      alert('Cadastro realizado com sucesso')
+      navigate('/');
+    } catch (e) {
+      console.log('Erro ao cadastrar usuario: ' + e);
+      alert('Erro ao cadastrar usuário, aguarde e tente novamente');
+    }
+
   };
 
   return (
@@ -23,8 +50,8 @@ const Cadastrar = () => {
         className="input"
         type="text"
         placeholder="Usuário"
-        value={usuario}
-        onChange={(e) => setUsuario(e.target.value)}
+        value={nomeUsuario}
+        onChange={(e) => setNomeUsuario(e.target.value)}
         required
       />
       <input
@@ -46,7 +73,7 @@ const Cadastrar = () => {
       <div className='buttons'>
         <button className="button" type="submit">Registrar</button>
         <Link to={'/'}>
-          <button className="buttonCancelar" type="submit">Cancelar</button>
+          <button className="buttonCancelar">Cancelar</button>
         </Link>
       </div>
     </form>

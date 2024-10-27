@@ -3,6 +3,7 @@ import { ModeloFilme } from "../../models/ModeloFilme";
 import Filme from "../Filme/Filme";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
+import { Link, useNavigate } from 'react-router-dom';
 
 const ListaFilmes = () => {
   const [listaFilmes, setListaFilmes] = useState<ModeloFilme[]>([]);
@@ -10,11 +11,16 @@ const ListaFilmes = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [pesquisa, setPesquisa] = useState<string>("")
   const [pesquisaGenero, setPesquisaGenero] = useState<string>("");
-  
+  const navigate = useNavigate()
+
   let meuIp = 'localhost'
   let ipFaculdade = '172.17.2.89'
 
   useEffect(() => {
+    if(!localStorage.User){
+      navigate('/');
+    }
+
     fetch(`http://${meuIp}:8080/FilmZone.api/api/Filme`)
       .then((response) => response.json())
       .then((data) => {

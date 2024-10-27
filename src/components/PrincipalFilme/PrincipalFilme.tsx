@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { getGenreName } from "../utils/genreMapping";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faClock, faPlay, faStar } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const PrincipalFilme = () => {
   const { id } = useParams()
@@ -15,10 +16,16 @@ const PrincipalFilme = () => {
   const trailerRef = useRef<HTMLVideoElement>(null);
   const filmeMidiaRef = useRef<HTMLVideoElement>(null);
 
+  const navigate = useNavigate()
+
   let meuIp = 'localhost'
   let ipFaculdade = '172.17.2.89'
 
   useEffect(() => {
+    if(!localStorage.User){
+      navigate('/')
+    }
+    
     fetch(`http://${meuIp}:8080/FilmZone.api/api/Filme/${id}`)
       .then((response) => response.json())
       .then((data) => {
