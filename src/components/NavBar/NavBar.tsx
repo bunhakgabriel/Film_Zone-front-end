@@ -3,12 +3,22 @@ import './NavBar.css'
 import { genreMap } from '../utils/genreMapping'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { log } from 'console';
 
 interface ComponenteFilhoProps {
     busca?: (tipo: 'F' | 'G', value: string) => void;
 }
 const NavBar = ({ busca }: ComponenteFilhoProps) => {
+
+    const logout = () => {
+        const confirmLogout = 
+            window.confirm('Deseja realmente desconectar sua sessão?');
+        if (confirmLogout) {
+            localStorage.clear();
+            window.location.reload();
+        }
+    }
 
     return (
         <header>
@@ -34,6 +44,12 @@ const NavBar = ({ busca }: ComponenteFilhoProps) => {
             <div className='inputBusca' >
                 <input type="text" onChange={(e) => busca!('F', e.target.value)} />
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: "white", }} size='xl' />
+                <FontAwesomeIcon
+                    onClick={logout}
+                    style={{ marginLeft: '40px' }}
+                    icon={faArrowRightFromBracket}
+                    size='xl'
+                    className='logout' />
             </div>
         </header>
     )

@@ -45,3 +45,13 @@ select{
     border: none;
     margin: 7px;
 }
+
+.logout:hover{
+    cursor: pointer;
+    color: gray;
+    transition: 0.2s;
+}
+
+.logout:active{
+    color: rgba(0, 0, 0, 0.0);
+}
